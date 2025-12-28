@@ -8,18 +8,22 @@ body {
 #maze {
   width: 100vw;
   height: 70vh;
-  position: relative;
   background: #9acd32;
 }
 
-#path {
-  position: absolute;
-  width: 10px;
-  height: 500px;
-  background: yellow;
-  left: 50%;
-  top: 50px;
+#mazeSvg {
+  width: 100%;
+  height: 100%;
 }
+
+#mazePath {
+  fill: none;
+  stroke: #ffd700;
+  stroke-width: 20;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 
 #finalEntity {
   display: none;
