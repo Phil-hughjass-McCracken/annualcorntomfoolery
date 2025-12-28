@@ -71,16 +71,24 @@ function nextLevel() {
 
 /* ---- FINAL ENTITY ---- */
 function finalScare() {
-  document.body.innerHTML = "";
-  document.body.style.background = "black";
+  const overlay = document.createElement("div");
+  overlay.style.position = "fixed";
+  overlay.style.inset = "0";
+  overlay.style.background = "black";
+  overlay.style.zIndex = "9999";
 
   const img = document.createElement("img");
-  img.src = Diddy-working-on-new-album.jpg"";   // <-- YOU control this
-  img.style.position = "fixed";
-  img.style.inset = "0";
+  img.src = "entity.jpg"; // <-- YOUR scary JPEG here
   img.style.width = "100%";
   img.style.height = "100%";
   img.style.objectFit = "cover";
+
+  overlay.appendChild(img);
+  document.body.appendChild(overlay);
+
+  sting.volume = 1;
+  sting.play();
+}
 
   document.body.appendChild(img);
 
