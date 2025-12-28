@@ -1,14 +1,19 @@
 body {
   margin: 0;
-  font-family: "Comic Sans MS", cursive;
   background: #c7f0a1;
   text-align: center;
+  font-family: "Comic Sans MS", cursive;
 }
 
 #maze {
-  width: 100vw;
-  height: 70vh;
-  background: #9acd32;
+  width: 90vw;
+  height: 75vh;
+  margin: 0 auto;
+  background: url("corn.png") repeat;
+  background-size: 120px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
 }
 
 #mazeSvg {
@@ -18,28 +23,49 @@ body {
 
 #mazePath {
   fill: none;
+  stroke: url(#cornStroke);
   stroke: #ffd700;
-  stroke-width: 20;
+  stroke-width: 26;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
+.uneasy {
+  background: #2a331c;
+  color: #ddd;
+}
+body {
+  margin: 0;
+  background: #c7f0a1;
+  text-align: center;
+  font-family: "Comic Sans MS", cursive;
+}
 
-#finalEntity {
-  display: none;
-  position: fixed;
-  inset: 0;
+#maze {
+  width: 90vw;
+  height: 75vh;
+  margin: 0 auto;
+  background: url("corn.png") repeat;
+  background-size: 120px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+#mazeSvg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: 9999;
+}
+
+#mazePath {
+  fill: none;
+  stroke: url(#cornStroke);
+  stroke: #ffd700;
+  stroke-width: 26;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .uneasy {
-  background: #2f3b1f;
+  background: #2a331c;
   color: #ddd;
-}
-.wall {
-  position: absolute;
-  background: #ffd700;
-}
