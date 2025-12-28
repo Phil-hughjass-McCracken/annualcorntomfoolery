@@ -35,3 +35,7 @@ body {
   background: #2f3b1f;
   color: #ddd;
 }
+.wall {
+  position: absolute;
+  background: #ffd700;
+}
