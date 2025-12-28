@@ -75,7 +75,7 @@ function finalScare() {
   document.body.style.background = "black";
 
   const img = document.createElement("img");
-  img.src = "entity.png";   // <-- YOU control this
+  img.src = Diddy-working-on-new-album.jpg"";   // <-- YOU control this
   img.style.position = "fixed";
   img.style.inset = "0";
   img.style.width = "100%";
