@@ -7,27 +7,30 @@ const message = document.getElementById("message");
 let level = 1;
 let active = false;
 
-/* unlock audio */
+/* ---- AUDIO UNLOCK ---- */
 document.body.addEventListener("click", () => {
   music.volume = 0.4;
   music.play().catch(() => {});
 }, { once: true });
 
+/* ---- MAZE GENERATOR ---- */
 function generateMaze() {
   const points = [];
-  const width = window.innerWidth;
+  const width = maze.clientWidth;
   const height = maze.clientHeight;
 
-  let x = 50;
-  let y = height - 50;
+  let x = width / 2;
+  let y = height - 40;
+
+  const segments = 10 + level * 5;
 
   points.push(`M ${x} ${y}`);
 
-  for (let i = 0; i < 6 + level * 2; i++) {
-    x += (Math.random() * 200 - 100);
-    y -= (height / (6 + level * 2));
+  for (let i = 0; i < segments; i++) {
+    x += (Math.random() * 300 - 150);
+    y -= height / segments;
 
-    x = Math.max(50, Math.min(width - 50, x));
+    x = Math.max(80, Math.min(width - 80, x));
     points.push(`L ${x} ${y}`);
   }
 
@@ -41,14 +44,14 @@ path.addEventListener("mouseenter", () => {
 maze.addEventListener("mouseleave", () => {
   if (!active) return;
   active = false;
-  advanceLevel();
+  nextLevel();
 });
 
-function advanceLevel() {
+function nextLevel() {
   level++;
 
   if (level === 2) {
-    message.textContent = "Great job! 🌽";
+    message.textContent = "Nice job! 🌽";
     music.playbackRate = 0.95;
   }
 
@@ -59,19 +62,20 @@ function advanceLevel() {
   }
 
   if (level >= 4) {
-    triggerFinal();
+    finalScare();
     return;
   }
 
   generateMaze();
 }
 
-function triggerFinal() {
+/* ---- FINAL ENTITY ---- */
+function finalScare() {
   document.body.innerHTML = "";
   document.body.style.background = "black";
 
   const img = document.createElement("img");
-  img.src = "entity_final.png";
+  img.src = "entity.png";   // <-- YOU control this
   img.style.position = "fixed";
   img.style.inset = "0";
   img.style.width = "100%";
@@ -79,6 +83,8 @@ function triggerFinal() {
   img.style.objectFit = "cover";
 
   document.body.appendChild(img);
+
+  sting.volume = 1;
   sting.play();
 }
 
