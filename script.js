@@ -1,49 +1,51 @@
+const path = document.getElementById("mazePath");
 const maze = document.getElementById("maze");
 const music = document.getElementById("music");
 const sting = document.getElementById("sting");
 const message = document.getElementById("message");
 
 let level = 1;
-let started = false;
+let active = false;
 
-/* ---- AUDIO FIX (browsers are cowards) ---- */
+/* unlock audio */
 document.body.addEventListener("click", () => {
   music.volume = 0.4;
   music.play().catch(() => {});
 }, { once: true });
 
-/* ---- MAZE GENERATION ---- */
 function generateMaze() {
-  maze.innerHTML = "";
+  const points = [];
+  const width = window.innerWidth;
+  const height = maze.clientHeight;
 
-  const wallCount = 5 + level * 2;
+  let x = 50;
+  let y = height - 50;
 
-  for (let i = 0; i < wallCount; i++) {
-    const wall = document.createElement("div");
-    wall.className = "wall";
+  points.push(`M ${x} ${y}`);
 
-    const vertical = Math.random() > 0.5;
+  for (let i = 0; i < 6 + level * 2; i++) {
+    x += (Math.random() * 200 - 100);
+    y -= (height / (6 + level * 2));
 
-    wall.style.width = vertical ? "10px" : `${100 + Math.random()*200}px`;
-    wall.style.height = vertical ? `${100 + Math.random()*200}px` : "10px";
-
-    wall.style.left = `${Math.random() * 90}%`;
-    wall.style.top = `${Math.random() * 90}%`;
-
-    maze.appendChild(wall);
+    x = Math.max(50, Math.min(width - 50, x));
+    points.push(`L ${x} ${y}`);
   }
+
+  path.setAttribute("d", points.join(" "));
 }
 
-/* ---- LEVEL PROGRESSION ---- */
-maze.addEventListener("mouseenter", () => {
-  started = true;
+path.addEventListener("mouseenter", () => {
+  active = true;
 });
 
 maze.addEventListener("mouseleave", () => {
-  if (!started) return;
+  if (!active) return;
+  active = false;
+  advanceLevel();
+});
 
+function advanceLevel() {
   level++;
-  started = false;
 
   if (level === 2) {
     message.textContent = "Great job! 🌽";
@@ -51,8 +53,8 @@ maze.addEventListener("mouseleave", () => {
   }
 
   if (level === 3) {
-    document.body.classList.add("uneasy");
     message.textContent = "Stay on the path.";
+    document.body.classList.add("uneasy");
     music.playbackRate = 0.8;
   }
 
@@ -62,9 +64,8 @@ maze.addEventListener("mouseleave", () => {
   }
 
   generateMaze();
-});
+}
 
-/* ---- FINAL JUMPSCARE FIX ---- */
 function triggerFinal() {
   document.body.innerHTML = "";
   document.body.style.background = "black";
@@ -78,10 +79,7 @@ function triggerFinal() {
   img.style.objectFit = "cover";
 
   document.body.appendChild(img);
-
-  sting.volume = 1;
   sting.play();
 }
 
-/* ---- START GAME ---- */
 generateMaze();
