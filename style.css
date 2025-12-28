@@ -9,11 +9,13 @@ body {
   width: 90vw;
   height: 75vh;
   margin: 0 auto;
-  background: url("corn.png") repeat;
+  background: url("corn.png") repeat; /* only the corn texture here */
   background-size: 120px;
   border-radius: 12px;
   position: relative;
   overflow: hidden;
+}
+
 }
 
 #mazeSvg {
